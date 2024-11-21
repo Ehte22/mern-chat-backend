@@ -5,7 +5,14 @@ require("colors")
 
 const app = express()
 const server = http.createServer(app)
-const io = Server(server, { cors: { origin: "https://mern-chat-feb5.onrender.com" } })
+const io = Server(server, {
+    cors: {
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+            callback(null, true);
+        },
+    }
+})
 
 let ONLINE_USERS = []
 let TYPING = []
